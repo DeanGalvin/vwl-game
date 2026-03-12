@@ -10,7 +10,7 @@ function App() {
   const handleGuessSubmit = async (guess: string) => {
     const isCorrect = await submitGuess(guess);
     setGuessState(isCorrect ? 'correct' : 'incorrect');
-    setTimeout(() => setGuessState('idle'), 1000); // clear animation state after 1s
+    setTimeout(() => setGuessState('idle'), 1000);
   };
 
   if (state.status === 'loading') {
@@ -27,7 +27,7 @@ function App() {
     <div className="app-container animate-fade-in">
       <header className="game-header">
         <h2>{state.puzzle?.category}</h2>
-        <h1>Missing Vowels</h1>
+        <h1>VWL</h1>
         {state.status === 'playing' && (
           <div className="progress-indicator">
             Word {state.currentWordIndex + 1} of 5
@@ -42,7 +42,8 @@ function App() {
           <div className="input-section">
             <GuessInput 
               onSubmit={handleGuessSubmit} 
-              disabled={state.status !== 'playing' || guessState !== 'idle'} 
+              isAnimating={guessState !== 'idle'}
+              disabled={state.status !== 'playing'} 
             />
           </div>
         ) : (

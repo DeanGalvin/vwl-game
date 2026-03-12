@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
 
 :root {
-  /* Core Colors */
   --color-bg: #0b0c10;
   --color-surface: #1f2833;
   --color-surface-hover: #293644;
@@ -10,15 +9,12 @@
   --color-text-secondary: #8b929a;
   --color-text-highlight: #66fcf1;
 
-  /* Game Status Colors */
   --color-correct: #45a29e;
   --color-error: #ef4444;
   --color-warning: #f59e0b;
 
-  /* UI Gradients */
   --gradient-primary: linear-gradient(135deg, #66fcf1 0%, #45a29e 100%);
 
-  /* Glassmorphism */
   --glass-bg: rgba(31, 40, 51, 0.4);
   --glass-border: rgba(102, 252, 241, 0.1);
   --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
@@ -63,6 +59,7 @@ h1 {
   line-height: 1.1;
   background: var(--gradient-primary);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   margin: 0 0 0.2rem 0;
   text-shadow: 0 0 40px rgba(102, 252, 241, 0.3);
@@ -109,7 +106,6 @@ h2 {
   animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
 }
 
-/* Game Board */
 .game-board {
   display: flex;
   flex-direction: column;
@@ -194,11 +190,32 @@ h2 {
   font-size: 1.5rem;
 }
 
+.result-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.guess-display {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.revealed-answer {
+  font-size: 0.7em;
+  color: var(--color-correct);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 800;
+  opacity: 0.9;
+}
+
 .success-icon { color: var(--color-correct); }
 .error-icon { color: var(--color-error); }
 .locked-text { color: rgba(255,255,255,0.1); }
 
-/* Guess Input */
 .guess-form {
   display: flex;
   flex-direction: column;
@@ -263,6 +280,11 @@ button {
   cursor: not-allowed;
 }
 
+.locked-input {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
 .btn-skip {
   background: rgba(255,255,255,0.05);
   color: var(--color-text-secondary);
@@ -274,7 +296,6 @@ button {
   color: var(--color-text-primary);
 }
 
-/* Results Section */
 .results-section {
   text-align: center;
   padding: 2rem 0;
@@ -304,7 +325,6 @@ button {
   font-size: 1.1rem;
 }
 
-/* Animations */
 @keyframes shake {
   10%, 90% { transform: translate3d(-1px, 0, 0); }
   20%, 80% { transform: translate3d(2px, 0, 0); }

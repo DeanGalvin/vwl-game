@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { fetchTodayPuzzle, hashGuess } from '../services/puzzleService';
+import { fetchTodayPuzzle } from '../services/puzzleService';
 import type { DailyPuzzle } from '../services/puzzleService';
 
 export type GameStatus = 'loading' | 'playing' | 'won' | 'lost' | 'error';
@@ -37,7 +37,6 @@ export function useGameState() {
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        // Reset status if it's playing but they finished it somehow
         return parsed;
       } catch (e) {
         console.error('Failed to parse local storage state', e);
@@ -78,15 +77,16 @@ export function useGameState() {
     if (state.status === 'loading' || !state.puzzle) {
       loadDailyPuzzle();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const submitGuess = async (guess: string) => {
     if (!state.puzzle || state.status !== 'playing') return false;
 
-    const currentHash = state.puzzle.answers[state.currentWordIndex];
-    const guessHash = await hashGuess(guess);
-    const isCorrect = currentHash === guessHash;
+    const encodedAnswer = state.puzzle.answers[state.currentWordIndex];
+    const decodedAnswer = atob(encodedAnswer);
+    const normalizedAnswer = decodedAnswer.toLowerCase().replace(/[^a-z0-9]/g, '');
+    const normalizedGuess = guess.toLowerCase().replace(/[^a-z0-9]/g, '');
+    const isCorrect = normalizedAnswer === normalizedGuess;
     
     const newGuesses = [...state.guesses];
     newGuesses[state.currentWordIndex] = { guess, isCorrect };
@@ -103,7 +103,6 @@ export function useGameState() {
         gamesPlayed += 1;
         lastPlayedDate = state.puzzle?.date || new Date().toISOString();
         
-        // Did they get all 5? (If they skipped, isCorrect is false)
         const allCorrect = newGuesses.every(g => g?.isCorrect);
         if (allCorrect) {
           currentStreak += 1;

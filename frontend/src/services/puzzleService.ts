@@ -1,13 +1,11 @@
-// The puzzle structure that the backend returns
 export interface DailyPuzzle {
   id: number;
   date: string;
   category: string;
-  words: string[]; // The obscured words (missing vowels, randomized spacing)
-  answers: string[]; // The hashed answers
+  words: string[];
+  answers: string[];
 }
 
-// We will use Vite's environment variables to determine the backend URL
 const API_BASE_URL = import.meta.env.PROD
   ? 'https://vwl-game-api.vercel.app/api'
   : 'http://localhost:3001/api';
@@ -20,13 +18,4 @@ export async function fetchTodayPuzzle(): Promise<DailyPuzzle> {
   return response.json();
 }
 
-// Client-side helper to hash the user's guess exactly exactly the same way the server does
-// This uses the Web Crypto API
-export async function hashGuess(guess: string): Promise<string> {
-  const normalized = guess.toLowerCase().replace(/[^a-z0-9]/g, '');
-  const msgUint8 = new TextEncoder().encode(normalized);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  const hashHex = hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
-  return hashHex;
-}
+

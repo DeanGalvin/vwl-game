@@ -33,7 +33,12 @@ export const GameBoard: React.FC<GameBoardProps> = ({ gameState }) => {
                    </div>
               ) : isPast ? (
                   <div className="result-wrapper">
-                    <span className="original-text">{guessObj?.guess || 'SKIPPED'}</span>
+                    <div className="guess-display">
+                      <span className="original-text">{guessObj?.guess || 'SKIPPED'}</span>
+                      {!guessObj?.isCorrect && gameState.puzzle && (
+                        <span className="revealed-answer animate-fade-in">{atob(gameState.puzzle.answers[index])}</span>
+                      )}
+                    </div>
                     {guessObj?.isCorrect ? (
                       <span className="icon success-icon">✓</span>
                     ) : (
