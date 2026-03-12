@@ -47,9 +47,9 @@ function App() {
             />
           </div>
         ) : (
-          <div className="results-section animate-pop">
-            <h3>Daily Complete!</h3>
-            <div className="score-display">
+          <div className={`results-section animate-pop ${score === 5 ? 'perfect-score' : ''}`}>
+            <h3>{score === 5 ? 'Flawless Victory!' : 'Daily Complete!'}</h3>
+            <div className={`score-display ${score === 5 ? 'animate-golden-pulse' : ''}`}>
               <span className="score-number">{score}</span>
               <span className="score-denominator">/ 5</span>
             </div>
