@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "date": "2026-03-12",
+    "category": "Classic Science Fiction Movies",
+    "words": [
+      "Blade Runner",
+      "The Matrix",
+      "Alien",
+      "2001 A Space Odyssey",
+      "Terminator 2"
+    ]
+  },
+  {
+    "id": 2,
+    "date": "2026-03-13",
+    "category": "Colors of the Rainbow",
+    "words": [
+      "Red",
+      "Orange",
+      "Yellow",
+      "Green",
+      "Violet"
+    ]
+  },
+  {
+    "id": 3,
+    "date": "2026-03-14",
+    "category": "Popular Programming Languages",
+    "words": [
+      "JavaScript",
+      "Python",
+      "TypeScript",
+      "Rust",
+      "Go"
+    ]
+  }
+]
