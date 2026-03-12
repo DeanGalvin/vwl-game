@@ -8,8 +8,8 @@ export interface DailyPuzzle {
 }
 
 // We will use Vite's environment variables to determine the backend URL
-const API_BASE_URL = import.meta.env.PROD 
-  ? 'https://missing-vowels-api.vercel.app/api' // Replace with your actual Vercel domain later
+const API_BASE_URL = import.meta.env.PROD
+  ? 'https://vwl-game-api.vercel.app/api'
   : 'http://localhost:3001/api';
 
 export async function fetchTodayPuzzle(): Promise<DailyPuzzle> {
